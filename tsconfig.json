@@ -9,9 +9,7 @@
         "removeComments": true,
         "declaration": true,
         "sourceMap": true,
-        "esModuleInterop": true,
-        "typeRoots": ["index.d.ts", "node_modules/@types"]
+        "esModuleInterop": true
     },
-    "include": ["./src/**/*.tsx", "./src/**/*.ts"],
     "exclude": ["node_modules", "build"]
 }

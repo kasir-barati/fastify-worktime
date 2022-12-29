@@ -4,7 +4,8 @@
 npm init -y
 touch .gitignore
 # Add git ignore file/directories to the created file
-npm i -D typescript ts-node fastify-tsconfig prisma rimraf prettier pretty-quick husky nodemon @types/node @commitlint/{cli,config-conventional}
+npm i -D typescript ts-node fastify-tsconfig pino-pretty prisma rimraf prettier pretty-quick husky nodemon @types/node @commitlint/{cli,config-conventional}
+npx prisma init --datasource-provider postgresql
 
 # Download prettier conf and add its script
 wget https://gist.githubusercontent.com/kasir-barati/2bcdeea964f88712eca171adb3fbd979/raw/.prettierrc
@@ -16,6 +17,7 @@ echo '{"extends":["@commitlint/config-conventional"]}' > .commitlintrc.json
 node -e "const { readFileSync, writeFileSync } = require('fs'); const packageJson = JSON.parse(readFileSync('package.json', 'utf-8')); packageJson.scripts = { ...packageJson.scripts, \"postinstall\": \"husky install\" }; writeFileSync('package.json', JSON.stringify(packageJson))"
 npx husky install
 npx husky add .husky/commit-msg "npx commitlint --edit $1"
+npx husky add .husky/pre-commit "npm run pretty-quick --staged && yarn format:prisma && npm run lint"
 
 touch tsconfig.json
 # Add ts configurations in the created tsconfig.json file
@@ -26,6 +28,8 @@ node -e "const { readFileSync, writeFileSync } = require('fs'); const packageJso
 npm i -D eslint eslint-config-prettier eslint-plugin-prettier @typescript-eslint/parser @typescript-eslint/eslint-plugin
 touch .eslintrc .eslintignore
 # Add confs in the created files
+
+npm i fastify fastify-zod zod zod-to-json-schema fastify-jwt fastify-swagger @prisma/client @fastify/env @fastify/autoload
 
 npm run format
 ```
