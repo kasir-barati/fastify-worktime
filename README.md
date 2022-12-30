@@ -40,6 +40,16 @@ npm run format
 npm ci
 # To generate soly types
 npx prisma generate
+# To generate new migration
 npx prisma migrate dev --name name of the migration
+# To run the postgres container
 docker-compose up -d
+npm run start:dev
+curl --location --request POST 'http://127.0.0.1:3000/api/users' \
+--header 'Content-Type: application/json' \
+--data-raw '{
+    "name": "Kasir",
+    "email": "kasir.barati@gmail.com",
+    "password": "realy long password without complexity is better than complex passwords from security point of view"
+}'
 ```
