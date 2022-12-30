@@ -1,6 +1,8 @@
 import { join } from 'path';
 import fastify from 'fastify';
 import fastifyAutoload from '@fastify/autoload';
+import userRoutes from './modules/user/user.route';
+import { registerUserSchemas } from './modules/user/user.dto';
 
 // const server = fastify({ logger: process.env.something_that_must_be_in_env_file });
 // const server = fastify({ logger: fastify.config.something_that_must_be_in_env_file });
@@ -13,7 +15,9 @@ async function main() {
         dir: join(__dirname, 'plugins'),
     });
 
-    return server.listen({
+    registerUserSchemas(server);
+
+    server.register(userRoutes, { prefix: '/api/users' }).listen({
         port: Number(server.config.PORT),
         host: HOST,
     });

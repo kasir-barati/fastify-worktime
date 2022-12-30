@@ -40,6 +40,7 @@
         "@fastify/autoload": "^5.6.0",
         "@fastify/env": "^4.2.0",
         "@prisma/client": "^4.8.0",
+        "argon2": "^0.30.2",
         "fastify": "^4.10.2",
         "fastify-jwt": "^4.2.0",
         "fastify-plugin": "^4.4.0",

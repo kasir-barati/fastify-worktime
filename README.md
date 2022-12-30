@@ -29,7 +29,17 @@ npm i -D eslint eslint-config-prettier eslint-plugin-prettier @typescript-eslint
 touch .eslintrc .eslintignore
 # Add confs in the created files
 
-npm i fastify fastify-zod zod zod-to-json-schema fastify-jwt fastify-swagger @prisma/client @fastify/env @fastify/autoload
+npm i fastify fastify-zod zod zod-to-json-schema fastify-jwt fastify-swagger @prisma/client @fastify/env @fastify/autoload argon2
 
 npm run format
+```
+
+# Start app
+
+```bash
+npm ci
+# To generate soly types
+npx prisma generate
+npx prisma migrate dev --name name of the migration
+docker-compose up -d
 ```
