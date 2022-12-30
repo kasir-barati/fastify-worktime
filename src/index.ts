@@ -2,6 +2,8 @@ import { join } from 'path';
 import fastify from 'fastify';
 import fastifyAutoload from '@fastify/autoload';
 
+// const server = fastify({ logger: process.env.something_that_must_be_in_env_file });
+// const server = fastify({ logger: fastify.config.something_that_must_be_in_env_file });
 const server = fastify({ logger: true });
 const HOST = '0.0.0.0';
 
