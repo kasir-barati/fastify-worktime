@@ -11,5 +11,5 @@ export async function registerUserController(
 ) {
     const user = await createUserService(request.body);
 
-    return reply.send(user);
+    return reply.status(201).send(user);
 }

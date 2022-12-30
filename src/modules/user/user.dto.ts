@@ -7,7 +7,7 @@ const user = z.object({
     email: z.string().email(),
 });
 const hasPassword = z.object({ password: z.string().min(20) });
-const hasId = z.object({ password: z.string().uuid() });
+const hasId = z.object({ id: z.string().uuid() });
 
 const createUserDto = user.merge(hasPassword);
 const createUserReplyDto = user.merge(hasId);
