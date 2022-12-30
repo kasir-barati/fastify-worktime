@@ -1,8 +1,10 @@
+import { JSONSchemaType } from 'ajv';
+import { EnvSchemaData } from 'env-schema';
 import { FastifyInstance } from 'fastify';
 import fastifyEnv, { FastifyEnvOptions } from '@fastify/env';
 import fastifyPlugin from 'fastify-plugin';
 
-const schema = {
+const schema: Omit<JSONSchemaType<EnvSchemaData>, 'required'> = {
     type: 'object',
     required: ['PORT', 'NODE_ENV', 'DATABASE_URL'],
     properties: {
@@ -28,18 +30,15 @@ const schema = {
         },
     },
 };
+
 const options: FastifyEnvOptions = {
+    confKey: 'config', // Optional, default: 'config'
     schema,
     dotenv: true,
 };
 
-export default fastifyPlugin(async (server: FastifyInstance) => {
-    server.register(fastifyEnv, options).ready((err) => {
-        if (err) {
-            server.log.error(err);
-            process.exit(1);
-        }
-
-        server.log.info(server.config);
-    });
-});
+export default fastifyPlugin<FastifyEnvOptions>(
+    async (server: FastifyInstance) => {
+        await server.register(fastifyEnv, options);
+    },
+);
