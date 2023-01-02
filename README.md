@@ -29,7 +29,14 @@ npm i -D eslint eslint-config-prettier eslint-plugin-prettier @typescript-eslint
 touch .eslintrc .eslintignore
 # Add confs in the created files
 
-npm i fastify fastify-zod zod zod-to-json-schema fastify-jwt fastify-swagger @prisma/client @fastify/env @fastify/autoload argon2
+npm i fastify fastify-zod zod zod-to-json-schema fastify-jwt fastify-swagger axios @prisma/client @fastify/env @fastify/autoload argon2
+
+# Configure Jest for fastify project
+npm install -D jest ts-jest @types/jest
+my-touch tests/tsconfig.test.json
+echo "test('OK', () => { expect(2).toEqual(2) });" > tests/user.test.ts
+node -e "const { readFileSync, writeFileSync } = require('fs'); const packageJson = JSON.parse(readFileSync('package.json', 'utf-8')); packageJson.scripts = { ...packageJson.scripts, \"test\": \"jest\" }; writeFileSync('package.json', JSON.stringify(packageJson))"
+npx ts-jest config:init
 
 npm run format
 ```
