@@ -20,7 +20,6 @@ const schema: Omit<JSONSchemaType<EnvSchemaData>, 'required'> = {
         },
         PORT: {
             type: 'string',
-            default: '3000',
         },
         NODE_ENV: {
             enum: ['development', 'production', 'test'],

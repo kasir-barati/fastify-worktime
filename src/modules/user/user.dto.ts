@@ -13,10 +13,13 @@ const createUserDto = user.merge(hasPassword);
 const createUserReplyDto = user.merge(hasId);
 
 export type CreateUserDto = z.infer<typeof createUserDto>;
-export const { schemas: userSchemas, $ref } = buildJsonSchemas({
-    createUserDto,
-    createUserReplyDto,
-});
+export const { schemas: userSchemas, $ref } = buildJsonSchemas(
+    {
+        createUserDto,
+        createUserReplyDto,
+    },
+    { $id: 'UserSchema' },
+);
 export function registerUserSchemas(server: FastifyInstance) {
     for (const schema of userSchemas) {
         server.addSchema(schema);
