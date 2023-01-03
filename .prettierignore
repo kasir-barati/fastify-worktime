@@ -4,6 +4,7 @@
 .angular
 
 /dist/
+/build/
 /bazel-out
 /integration/bazel/bazel-*
 *.log
