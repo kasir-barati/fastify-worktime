@@ -10,19 +10,19 @@ npx prisma init --datasource-provider postgresql
 # Download prettier conf and add its script
 wget https://gist.githubusercontent.com/kasir-barati/2bcdeea964f88712eca171adb3fbd979/raw/.prettierrc
 wget https://gist.githubusercontent.com/kasir-barati/8b32cf62e69e6f87a6bed899eefe1cb5/raw/.prettierignore
-node -e "const { readFileSync, writeFileSync } = require('fs'); const packageJson = JSON.parse(readFileSync('package.json', 'utf-8')); packageJson.scripts = { ...packageJson.scripts, \"format\": \"prettier -w . -u\" }; writeFileSync('package.json', JSON.stringify(packageJson))"
+npm pkg set scripts.format="prettier -w . -u"
 echo '{"extends":["@commitlint/config-conventional"]}' > .commitlintrc.json
 
 # Config husky and add its script
-node -e "const { readFileSync, writeFileSync } = require('fs'); const packageJson = JSON.parse(readFileSync('package.json', 'utf-8')); packageJson.scripts = { ...packageJson.scripts, \"postinstall\": \"husky install\" }; writeFileSync('package.json', JSON.stringify(packageJson))"
+npm pkg set scripts.prepare="husky install"
 npx husky install
 npx husky add .husky/commit-msg "npx commitlint --edit $1"
 npx husky add .husky/pre-commit "npm run pretty-quick --staged && yarn format:prisma && npm run lint"
 
 touch tsconfig.json
 # Add ts configurations in the created tsconfig.json file
-node -e "const { readFileSync, writeFileSync } = require('fs'); const packageJson = JSON.parse(readFileSync('package.json', 'utf-8')); packageJson.scripts = { ...packageJson.scripts, \"start:dev\": \"npx nodemon\" }; writeFileSync('package.json', JSON.stringify(packageJson))"
-node -e "const { readFileSync, writeFileSync } = require('fs'); const packageJson = JSON.parse(readFileSync('package.json', 'utf-8')); packageJson.scripts = { ...packageJson.scripts, \"build\": \"rimraf ./build && tsc\" }; writeFileSync('package.json', JSON.stringify(packageJson))"
+npm pkg set scripts.start\:dev"="npx nodemon"
+npm pkg set scripts.build="rimraf ./build && tsc"
 
 # Config eslint
 npm i -D eslint eslint-config-prettier eslint-plugin-prettier @typescript-eslint/parser @typescript-eslint/eslint-plugin
@@ -35,7 +35,7 @@ npm i fastify fastify-zod zod zod-to-json-schema fastify-jwt fastify-swagger axi
 npm install -D jest ts-jest @types/jest
 my-touch tests/tsconfig.test.json
 echo "test('OK', () => { expect(2).toEqual(2) });" > tests/user.test.ts
-node -e "const { readFileSync, writeFileSync } = require('fs'); const packageJson = JSON.parse(readFileSync('package.json', 'utf-8')); packageJson.scripts = { ...packageJson.scripts, \"test\": \"jest\" }; writeFileSync('package.json', JSON.stringify(packageJson))"
+npm pkg set scripts.test="jest"
 npx ts-jest config:init
 
 npm run format
