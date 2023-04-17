@@ -24,7 +24,7 @@
         "@types/node": "^18.15.11",
         "@typescript-eslint/eslint-plugin": "^5.58.0",
         "@typescript-eslint/parser": "^5.58.0",
-        "eslint": "^8.31.0",
+        "eslint": "^8.38.0",
         "eslint-config-prettier": "^8.6.0",
         "eslint-plugin-prettier": "^4.2.1",
         "fastify-tsconfig": "^1.0.1",
